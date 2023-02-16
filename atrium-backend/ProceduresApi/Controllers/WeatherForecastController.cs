@@ -8,7 +8,7 @@ namespace ProceduresApi.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing!!", "Bracing!!", "Chilly!!", "Cool!!", "Mild!!", "Warm!!", "Balmy!!", "Hot!!", "Sweltering!!", "Scorching!!"
+        "a!!", "aa!!", "ss!!", "dd!!", "ff!!", "gg!!", "hh!", "hhfs!!", "shs!!", "ww!!"
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
