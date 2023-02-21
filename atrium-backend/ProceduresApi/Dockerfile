@@ -6,7 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /atrium-backend
+WORKDIR /atrium-backend/ProceduresApi
 COPY ["ProceduresApi/ProceduresApi.csproj", "ProceduresApi/"]
 RUN dotnet restore "ProceduresApi/ProceduresApi.csproj"
 COPY . .
