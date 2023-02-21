@@ -16,8 +16,6 @@ spec:
       containers:
       - name: proceduresapi
         image: dpankov91/proceduresapi:latest
-	  ports:
-	  - containerPort: 3001
 ---
 apiVersion: v1
 kind: Service
