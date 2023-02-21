@@ -1,7 +1,7 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /atrium-backend
+WORKDIR /atrium-backend/ProceduresApi
 EXPOSE 80
 EXPOSE 443
 
@@ -10,7 +10,7 @@ WORKDIR /atrium-backend
 COPY ["ProceduresApi/ProceduresApi.csproj", "ProceduresApi/"]
 RUN dotnet restore "ProceduresApi/ProceduresApi.csproj"
 COPY . .
-WORKDIR "/atrium-backend"
+WORKDIR "/atrium-backend/ProceduresApi"
 RUN dotnet build "ProceduresApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
