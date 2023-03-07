@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+
+  apigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+     - 8001:80
+
+  proceduresapi:
+    container_name: procedures-api
+    image: ${DOCKER_REGISTRY-}proceduresapi
+    build:
+      context: .
+      dockerfile: ProceduresApi/Dockerfile
+
+
+  sessionsapi:
+    container_name: sessions-api
+    image: ${DOCKER_REGISTRY-}sessionsapi
+    build:
+      context: .
+      dockerfile: SessionsApi/Dockerfile
+

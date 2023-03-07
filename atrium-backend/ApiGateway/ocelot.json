@@ -1,0 +1,63 @@
+{
+  "Routes": [
+
+    // Procedures Web API
+    {
+      "UpstreamPathTemplate": "/api/procedures",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "proceduresapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/procedures"
+    },
+    {
+      "UpstreamPathTemplate": "/api/procedures/{procedureId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "proceduresapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/procedures/{procedureId}"
+    },
+
+    // Session Web API
+    {
+      "UpstreamPathTemplate": "/api/sessions",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sessionsapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/sessions"
+    },
+    {
+      "UpstreamPathTemplate": "/api/sessions/{sessionId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sessionsapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/sessions/{procedureId}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:800"
+  }
+}

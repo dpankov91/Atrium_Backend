@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ProceduresApi": {
+    "SessionsApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5104"
+      "applicationUrl": "http://localhost:5176"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -30,7 +30,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:23569",
+      "applicationUrl": "http://localhost:38925",
       "sslPort": 0
     }
   }
