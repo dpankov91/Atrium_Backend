@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProceduresApi.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +9,54 @@ namespace ProceduresApi.Controllers
     [ApiController]
     public class ProceduresController : ControllerBase
     {
+        private readonly ProcedureDbContext _procedureDbContext;
+
+        public ProceduresController(ProcedureDbContext procedureDbContext)
+        {
+            _procedureDbContext = procedureDbContext;
+        }
+
         // GET: api/<ProceduresController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<Procedure>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _procedureDbContext.Procedures.ToList();
         }
 
         // GET api/<ProceduresController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Procedure>> Get(int id)
         {
-            return "value";
+            var procedure = await _procedureDbContext.Procedures.FindAsync(id);
+            return procedure;
         }
 
         // POST api/<ProceduresController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] Procedure procedure)
         {
+            await _procedureDbContext.Procedures.AddAsync(procedure);
+            await _procedureDbContext.SaveChangesAsync();
+            return Ok();
         }
 
         // PUT api/<ProceduresController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Update([FromBody] Procedure procedure)
         {
+            _procedureDbContext.Procedures.Update(procedure);
+            await _procedureDbContext.SaveChangesAsync();
+            return Ok();
         }
 
         // DELETE api/<ProceduresController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            var customer = await _procedureDbContext.Procedures.FindAsync(id);
+            _procedureDbContext.Procedures.Remove(customer);
+            await _procedureDbContext.SaveChangesAsync();
+            return Ok();
         }
     }
 }

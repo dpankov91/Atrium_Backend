@@ -1,22 +1,43 @@
 version: '3.4'
 
-services:
+networks:
+  backend:
 
+services:
   apigateway:
     container_name: api-gateway
     image: ${DOCKER_REGISTRY-}apigateway
     build:
       context: .
       dockerfile: ApiGateway/Dockerfile
+    networks:
+     - backend
     ports:
      - 8001:80
 
+
+  proceduresdb:
+    container_name: procedures-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=mYp@ssw0rd13
+    networks:
+     - backend
+    ports:
+     - 18001:1433
   proceduresapi:
     container_name: procedures-api
     image: ${DOCKER_REGISTRY-}proceduresapi
     build:
       context: .
       dockerfile: ProceduresApi/Dockerfile
+    networks:
+     - backend
+    environment:
+     - DB_HOST=proceduresdb
+     - DB_NAME=customer
+     - DB_SA_PASSWORD=mYp@ssw0rd13
 
 
   sessionsapi:
