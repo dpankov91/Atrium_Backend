@@ -42,9 +42,16 @@ namespace ProceduresApi.Controllers
 
         // PUT api/<ProceduresController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update([FromBody] Procedure procedure)
+        public async Task<ActionResult> Put(int id, [FromBody] Procedure procedure)
         {
-            _procedureDbContext.Procedures.Update(procedure);
+            var proc = await _procedureDbContext.Procedures.FindAsync(id);
+            if (proc != null)
+            {
+                proc.Name =procedure.Name;
+                proc.IsCivil = procedure.IsCivil;
+                proc.AdditionalInfo = procedure.AdditionalInfo;
+            }
+            _procedureDbContext.Procedures.Update(proc);
             await _procedureDbContext.SaveChangesAsync();
             return Ok();
         }
