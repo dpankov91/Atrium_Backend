@@ -53,8 +53,8 @@ namespace ProceduresApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var customer = await _procedureDbContext.Procedures.FindAsync(id);
-            _procedureDbContext.Procedures.Remove(customer);
+            var procedure = await _procedureDbContext.Procedures.FindAsync(id);
+            _procedureDbContext.Procedures.Remove(procedure);
             await _procedureDbContext.SaveChangesAsync();
             return Ok();
         }

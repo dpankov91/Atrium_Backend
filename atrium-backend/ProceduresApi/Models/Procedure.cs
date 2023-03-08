@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProceduresApi.Models
 {
-    [Table("customer", Schema = "dbo")]
+    [Table("procedure", Schema = "dbo")]
     public class Procedure
     {
         [Key]
@@ -15,9 +15,9 @@ namespace ProceduresApi.Models
         public string Name { get; set; }
 
         [Column("isCivil")]
-        public bool isCivil { get; set; }
+        public bool IsCivil { get; set; }
 
-        [Column("additional_info")]
+        [Column("additionalInfo")]
         public string AdditionalInfo { get; set; }
     }
 }

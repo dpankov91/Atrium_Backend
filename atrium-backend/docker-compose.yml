@@ -36,7 +36,7 @@ services:
      - backend
     environment:
      - DB_HOST=proceduresdb
-     - DB_NAME=customer
+     - DB_NAME=procedure
      - DB_SA_PASSWORD=mYp@ssw0rd13
 
 
