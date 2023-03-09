@@ -32,7 +32,7 @@
     // Session Web API
     {
       "UpstreamPathTemplate": "/api/sessions",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post" ],
 
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -45,7 +45,7 @@
     },
     {
       "UpstreamPathTemplate": "/api/sessions/{sessionId}",
-      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "UpstreamHttpMethod": [ "Get", "Delete", "Put" ],
 
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -54,7 +54,7 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/sessions/{procedureId}"
+      "DownstreamPathTemplate": "/api/sessions/{sessionId}"
     }
   ],
   "GlobalConfiguration": {

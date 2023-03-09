@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SessionsApi.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,54 @@ namespace SessionsApi.Controllers
     [ApiController]
     public class SessionsController : ControllerBase
     {
-        // GET: api/<SessionsController>
+        private readonly SessionDbContext _sessionDbContext;
+
+        public SessionsController(SessionDbContext sessionDbContext)
+        {
+            _sessionDbContext = sessionDbContext;
+        }
+
+        // GET: api/<ProceduresController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<Session>> Get()
         {
-            return new string[] { "value3", "value4" };
+            return _sessionDbContext.Sessions.ToList();
         }
 
-        // GET api/<SessionsController>/5
+        // GET api/<ProceduresController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Session>> Get(int id)
         {
-            return "value";
+            var session = await _sessionDbContext.Sessions.FindAsync(id);
+            return session;
         }
 
-        // POST api/<SessionsController>
+        // POST api/<ProceduresController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] Session session)
         {
+            await _sessionDbContext.Sessions.AddAsync(session);
+            await _sessionDbContext.SaveChangesAsync();
+            return Ok();
         }
 
-        // PUT api/<SessionsController>/5
+        // PUT api/<ProceduresController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Put(int id, [FromBody] Session session)
         {
+            _sessionDbContext.Sessions.Update(session);
+            await _sessionDbContext.SaveChangesAsync();
+            return Ok();
         }
 
-        // DELETE api/<SessionsController>/5
+        // DELETE api/<ProceduresController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            var session = await _sessionDbContext.Sessions.FindAsync(id);
+            _sessionDbContext.Sessions.Remove(session);
+            await _sessionDbContext.SaveChangesAsync();
+            return Ok();
         }
     }
 }

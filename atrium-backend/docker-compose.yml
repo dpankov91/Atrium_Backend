@@ -39,11 +39,25 @@ services:
      - DB_NAME=procedure
      - DB_SA_PASSWORD=mYp@ssw0rd13
 
-
+  sessionsdb:
+    container_name: sessionsdb-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=mYp@ssw0rd13
+    networks:
+     - backend
+    ports:
+     - 18002:1433  
   sessionsapi:
     container_name: sessions-api
     image: ${DOCKER_REGISTRY-}sessionsapi
     build:
       context: .
       dockerfile: SessionsApi/Dockerfile
-
+    networks:
+     - backend
+    environment:
+     - DB_HOST=sessionsdb
+     - DB_NAME=session
+     - DB_SA_PASSWORD=mYp@ssw0rd13
