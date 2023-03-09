@@ -4,7 +4,7 @@
     // Procedures Web API
     {
       "UpstreamPathTemplate": "/api/procedures",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post" ],
 
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -17,7 +17,7 @@
     },
     {
       "UpstreamPathTemplate": "/api/procedures/{procedureId}",
-      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "UpstreamHttpMethod": [ "Get", "Delete", "Put" ],
 
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

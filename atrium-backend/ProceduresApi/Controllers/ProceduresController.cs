@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProceduresApi.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -44,14 +46,7 @@ namespace ProceduresApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] Procedure procedure)
         {
-            var proc = await _procedureDbContext.Procedures.FindAsync(id);
-            if (proc != null)
-            {
-                proc.Name =procedure.Name;
-                proc.IsCivil = procedure.IsCivil;
-                proc.AdditionalInfo = procedure.AdditionalInfo;
-            }
-            _procedureDbContext.Procedures.Update(proc);
+            _procedureDbContext.Procedures.Update(procedure);
             await _procedureDbContext.SaveChangesAsync();
             return Ok();
         }
