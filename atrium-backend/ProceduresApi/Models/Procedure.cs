@@ -15,7 +15,7 @@ namespace ProceduresApi.Models
         public string Name { get; set; }
 
         [Column("isCivil")]
-        public bool IsCivil { get; set; }
+        public int IsCivil { get; set; }
 
         [Column("additionalInfo")]
         public string AdditionalInfo { get; set; }
