@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProceduresApi", "ProceduresApi\ProceduresApi.csproj", "{FD936AE0-C726-4FD6-88A4-B38E846BC7C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProceduresApi", "ProceduresApi\ProceduresApi.csproj", "{FD936AE0-C726-4FD6-88A4-B38E846BC7C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{A3C89EAB-A1D7-401F-A7FB-2C46D90398FD}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,11 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{43431759-ED5B-4ECE-AB26-E7266D31D801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SessionsApi", "SessionsApi\SessionsApi.csproj", "{E12222F0-6C94-454C-A7BD-45BAA5C7FF77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SessionsApi", "SessionsApi\SessionsApi.csproj", "{E12222F0-6C94-454C-A7BD-45BAA5C7FF77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{B0E1341C-9686-42FE-B198-D005D7A1F583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{B0E1341C-9686-42FE-B198-D005D7A1F583}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2A22835E-B94F-451F-9137-CADE2BB784FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationWebApi", "AuthenticationWebApi\AuthenticationWebApi.csproj", "{C7CE244C-AC1D-495C-AAE1-8F98B5D99C59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtAuthenticationManager", "JwtAuthenticationManager\JwtAuthenticationManager.csproj", "{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +44,14 @@ Global
 		{2A22835E-B94F-451F-9137-CADE2BB784FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A22835E-B94F-451F-9137-CADE2BB784FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A22835E-B94F-451F-9137-CADE2BB784FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7CE244C-AC1D-495C-AAE1-8F98B5D99C59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7CE244C-AC1D-495C-AAE1-8F98B5D99C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7CE244C-AC1D-495C-AAE1-8F98B5D99C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7CE244C-AC1D-495C-AAE1-8F98B5D99C59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

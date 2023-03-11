@@ -61,3 +61,13 @@ services:
      - DB_HOST=sessionsdb
      - DB_NAME=session
      - DB_SA_PASSWORD=mYp@ssw0rd13
+
+  authenticationwebapi:
+    container_name: authentication-api
+    image: ${DOCKER_REGISTRY-}authenticationwebapi
+    build:
+      context: .
+      dockerfile: AuthenticationWebApi/Dockerfile
+    networks:
+     - backend   
+
