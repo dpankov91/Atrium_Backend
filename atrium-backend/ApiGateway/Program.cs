@@ -1,3 +1,4 @@
+using JwtAuthenticationManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -6,6 +7,7 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile($"ocelot.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 builder.Services.AddOcelot(builder.Configuration);
+builder.Services.AddCustomJwtAuthentication();
 
 #region CORS
 builder.Services.AddCors(options => options.AddPolicy("AllowEverything", builder => builder.AllowAnyOrigin()
@@ -19,5 +21,8 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowEverything");
 await app.UseOcelot();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

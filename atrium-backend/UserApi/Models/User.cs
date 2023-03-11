@@ -22,5 +22,14 @@ namespace UserApi.Models
 
         [Column("email")]
         public string Email { get; set; }
+
+        [Column("isAdmin")]
+        public int isAdmin { get; set; }
+
+        [Column("username")]
+        public string UserName { get; set; }
+
+        [Column("password")]
+        public string Password { get; set; }
     }
 }

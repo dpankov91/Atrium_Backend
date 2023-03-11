@@ -1,3 +1,4 @@
+using JwtAuthenticationManager;
 using Microsoft.EntityFrameworkCore;
 using UserApi.Infrastructure;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCustomJwtAuthentication();
 
 #region DB
 //Database Context Dependency Injection
@@ -28,6 +30,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowEverything");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

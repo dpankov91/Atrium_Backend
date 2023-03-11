@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UserApi.Infrastructure;
 using UserApi.Models;
 
@@ -34,6 +35,7 @@ namespace UserApi.Controllers
 
         // POST api/<ProceduresController>
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Post([FromBody] User user)
         {
             await _userDbContext.Users.AddAsync(user);
