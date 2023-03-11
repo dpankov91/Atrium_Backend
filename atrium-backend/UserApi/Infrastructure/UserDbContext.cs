@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
-using ProceduresApi.Models;
+using UserApi.Models;
 
-namespace ProceduresApi
+namespace UserApi.Infrastructure
 {
-    public class ProcedureDbContext : DbContext
+    public class UserDbContext : DbContext
     {
-        public ProcedureDbContext(DbContextOptions<ProcedureDbContext> dbContextOptions) : base(dbContextOptions)
+        public UserDbContext(DbContextOptions<UserDbContext> dbContextOptions) : base(dbContextOptions)
         {
             try
             {
@@ -24,6 +24,6 @@ namespace ProceduresApi
             }
         }
 
-        public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

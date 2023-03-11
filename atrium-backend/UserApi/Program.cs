@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ProceduresApi.Infrastructure;
+using UserApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +13,7 @@ var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
 var dbName = Environment.GetEnvironmentVariable("DB_NAME");
 var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
 var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};Trust Server Certificate = true";
-builder.Services.AddDbContext<ProcedureDbContext>(opt => opt.UseSqlServer(connectionString));
+builder.Services.AddDbContext<UserDbContext>(opt => opt.UseSqlServer(connectionString));
 #endregion
 
 #region CORS

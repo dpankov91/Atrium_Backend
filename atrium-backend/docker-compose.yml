@@ -71,3 +71,25 @@ services:
     networks:
      - backend   
 
+  usersdb:
+    container_name: usersdb-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=mYp@ssw0rd13
+    networks:
+     - backend
+    ports:
+     - 18003:1433    
+  userapi:
+    image: ${DOCKER_REGISTRY-}userapi
+    build:
+      context: .
+      dockerfile: UserApi/Dockerfile
+    networks:
+     - backend
+    environment:
+     - DB_HOST=usersdb
+     - DB_NAME=user
+     - DB_SA_PASSWORD=mYp@ssw0rd13
+

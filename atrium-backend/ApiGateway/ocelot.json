@@ -14,6 +14,33 @@
       ],
       "DownstreamPathTemplate": "/api/account"
     },
+    // Users Web API
+    {
+      "UpstreamPathTemplate": "/api/user",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/user"
+    },
+    {
+      "UpstreamPathTemplate": "/api/user/{userId}",
+      "UpstreamHttpMethod": [ "Get", "Delete", "Put" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/user/{userId}"
+    },
     // Procedures Web API
     {
       "UpstreamPathTemplate": "/api/procedures",

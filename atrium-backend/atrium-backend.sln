@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationWebApi", "Aut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtAuthenticationManager", "JwtAuthenticationManager\JwtAuthenticationManager.csproj", "{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserApi", "UserApi\UserApi.csproj", "{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{FD936AE0-C726-4FD6-88A4-B38E846BC7C6} = {A3C89EAB-A1D7-401F-A7FB-2C46D90398FD}
 		{E12222F0-6C94-454C-A7BD-45BAA5C7FF77} = {A3C89EAB-A1D7-401F-A7FB-2C46D90398FD}
 		{B0E1341C-9686-42FE-B198-D005D7A1F583} = {43431759-ED5B-4ECE-AB26-E7266D31D801}
+		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C} = {A3C89EAB-A1D7-401F-A7FB-2C46D90398FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25BD6534-3B25-4801-86DF-BE8E9B3BEBB2}

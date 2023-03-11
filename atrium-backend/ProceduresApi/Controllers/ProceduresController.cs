@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProceduresApi.Infrastructure;
 using ProceduresApi.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
