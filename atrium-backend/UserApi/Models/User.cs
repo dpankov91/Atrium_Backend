@@ -26,9 +26,6 @@ namespace UserApi.Models
         [Column("isAdmin")]
         public int isAdmin { get; set; }
 
-        [Column("username")]
-        public string UserName { get; set; }
-
         [Column("password")]
         public string Password { get; set; }
     }
