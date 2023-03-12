@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SessionsApi.Models;
 
@@ -19,6 +20,7 @@ namespace SessionsApi.Controllers
 
         // GET: api/<ProceduresController>
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<Session>> Get()
         {
             return _sessionDbContext.Sessions.ToList();
@@ -34,6 +36,7 @@ namespace SessionsApi.Controllers
 
         // POST api/<ProceduresController>
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Post([FromBody] Session session)
         {
             await _sessionDbContext.Sessions.AddAsync(session);
@@ -43,6 +46,7 @@ namespace SessionsApi.Controllers
 
         // PUT api/<ProceduresController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Put(int id, [FromBody] Session session)
         {
             _sessionDbContext.Sessions.Update(session);

@@ -44,7 +44,7 @@
     // Procedures Web API
     {
       "UpstreamPathTemplate": "/api/procedures",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get" ],
 
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -53,7 +53,31 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/procedures"
+      "DownstreamPathTemplate": "/api/procedures",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/procedures",
+      "UpstreamHttpMethod": [ "Post" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "proceduresapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/procedures",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administrator"
+      }
     },
     {
       "UpstreamPathTemplate": "/api/procedures/{procedureId}",
