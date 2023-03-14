@@ -20,7 +20,6 @@ namespace SessionsApi.Controllers
 
         // GET: api/<ProceduresController>
         [HttpGet]
-        [Authorize]
         public ActionResult<IEnumerable<Session>> Get()
         {
             return _sessionDbContext.Sessions.ToList();
@@ -36,7 +35,6 @@ namespace SessionsApi.Controllers
 
         // POST api/<ProceduresController>
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Post([FromBody] Session session)
         {
             await _sessionDbContext.Sessions.AddAsync(session);

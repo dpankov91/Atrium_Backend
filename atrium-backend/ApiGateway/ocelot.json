@@ -54,10 +54,10 @@
         }
       ],
       "DownstreamPathTemplate": "/api/procedures",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
     },
     {
       "UpstreamPathTemplate": "/api/procedures",
@@ -71,13 +71,13 @@
         }
       ],
       "DownstreamPathTemplate": "/api/procedures",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "Role": "Administrator"
-      }
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "Role": "Administrator"
+      //}
     },
     {
       "UpstreamPathTemplate": "/api/procedures/{procedureId}",
