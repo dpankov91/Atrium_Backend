@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SessionsApi.Infrastructure;
 using SessionsApi.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,20 +13,23 @@ namespace SessionsApi.Controllers
     public class SessionsController : ControllerBase
     {
         private readonly SessionDbContext _sessionDbContext;
+        private readonly IMessagePublisher messagePublisher;
 
-        public SessionsController(SessionDbContext sessionDbContext)
+        public SessionsController(SessionDbContext sessionDbContext,
+                                    IMessagePublisher publisher)
         {
             _sessionDbContext = sessionDbContext;
+            messagePublisher = publisher;
         }
 
-        // GET: api/<ProceduresController>
+        // GET: api/<SessionsController>
         [HttpGet]
         public ActionResult<IEnumerable<Session>> Get()
         {
             return _sessionDbContext.Sessions.ToList();
         }
 
-        // GET api/<ProceduresController>/5
+        // GET api/<SessionsController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Session>> Get(int id)
         {
@@ -33,26 +37,31 @@ namespace SessionsApi.Controllers
             return session;
         }
 
-        // POST api/<ProceduresController>
+        // POST api/<SessionsController>
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Session session)
         {
+            messagePublisher.PublishProcedureStatusChangedMessage(
+                session.ProcedureId, "in_process");
+
             await _sessionDbContext.Sessions.AddAsync(session);
             await _sessionDbContext.SaveChangesAsync();
             return Ok();
         }
 
-        // PUT api/<ProceduresController>/5
+        // PUT api/<SessionsController>/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Put(int id, [FromBody] Session session)
         {
+
+
             _sessionDbContext.Sessions.Update(session);
             await _sessionDbContext.SaveChangesAsync();
             return Ok();
         }
 
-        // DELETE api/<ProceduresController>/5
+        // DELETE api/<SessionsController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

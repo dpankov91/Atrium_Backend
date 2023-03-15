@@ -1,8 +1,15 @@
 using JwtAuthenticationManager;
 using Microsoft.EntityFrameworkCore;
-using SessionsApi;
+using SessionsApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string cloudAMQPConnectionString =
+   "host=hawk-01.rmq.cloudamqp.com;virtualHost=peygbptv;username=peygbptv;password=2a4P6Z-PTNDq4YSqxOuGhJxb3zqldMsN";
+
+// Register MessagePublisher (a messaging gateway) for dependency injection
+builder.Services.AddSingleton<IMessagePublisher>(new
+    MessagePublisher(cloudAMQPConnectionString));
 
 // Add services to the container.
 
@@ -26,7 +33,7 @@ builder.Services.AddCors(options => options.AddPolicy("AllowEverything", builder
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("AllowEverything");
 

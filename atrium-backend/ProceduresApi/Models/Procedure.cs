@@ -19,5 +19,15 @@ namespace ProceduresApi.Models
 
         [Column("additionalInfo")]
         public string AdditionalInfo { get; set; }
+
+        [Column("status")]
+        public ProcedureStatus Status { get; set; }
+
+        public enum ProcedureStatus
+        {
+            created = 1,
+            inProcess = 2,
+            completed = 3
+        }
     }
 }

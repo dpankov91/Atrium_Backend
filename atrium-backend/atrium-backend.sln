@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationWebApi", "Aut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtAuthenticationManager", "JwtAuthenticationManager\JwtAuthenticationManager.csproj", "{F18EF1A7-6CCF-4F0A-AE4A-D5597062FB14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserApi", "UserApi\UserApi.csproj", "{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserApi", "UserApi\UserApi.csproj", "{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "SharedModels\SharedModels.csproj", "{2F70E65B-6115-4065-B1BF-B9E0D217CC37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCDDF64B-99A3-4EF2-9DA4-E5745645E32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F70E65B-6115-4065-B1BF-B9E0D217CC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F70E65B-6115-4065-B1BF-B9E0D217CC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F70E65B-6115-4065-B1BF-B9E0D217CC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F70E65B-6115-4065-B1BF-B9E0D217CC37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using ProceduresApi.Data;
 using ProceduresApi.Infrastructure;
+using ProceduresApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string cloudAMQPConnectionString =
+   "host=hawk-01.rmq.cloudamqp.com;virtualHost=peygbptv;username=peygbptv;password=2a4P6Z-PTNDq4YSqxOuGhJxb3zqldMsN";
+
+// Register repositories for dependency injection
+builder.Services.AddScoped<IRepository<Procedure>, ProcedureRepository>();
 
 // Add services to the container.
 
@@ -24,7 +32,11 @@ builder.Services.AddCors(options => options.AddPolicy("AllowEverything", builder
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+// Create a message listener in a separate thread.
+Task.Factory.StartNew(() =>
+    new MessageListener(app.Services, cloudAMQPConnectionString).Start());
+
+//app.UseHttpsRedirection();
 
 app.UseCors("AllowEverything");
 

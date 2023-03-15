@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProceduresApi.Infrastructure;
+using ProceduresApi.Data;
 using ProceduresApi.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -12,25 +12,25 @@ namespace ProceduresApi.Controllers
     [ApiController]
     public class ProceduresController : ControllerBase
     {
-        private readonly ProcedureDbContext _procedureDbContext;
+        private readonly IRepository<Procedure> _repository;
 
-        public ProceduresController(ProcedureDbContext procedureDbContext)
+        public ProceduresController(IRepository<Procedure> repos)
         {
-            _procedureDbContext = procedureDbContext;
+            _repository = repos;
         }
 
         // GET: api/<ProceduresController>
         [HttpGet]
         public ActionResult<IEnumerable<Procedure>> Get()
         {
-            return _procedureDbContext.Procedures.ToList();
+            return _repository.GetAll().ToList();
         }
 
         // GET api/<ProceduresController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Procedure>> Get(int id)
         {
-            var procedure = await _procedureDbContext.Procedures.FindAsync(id);
+            var procedure = await _repository.Get(id);
             return procedure;
         }
 
@@ -38,8 +38,7 @@ namespace ProceduresApi.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Procedure procedure)
         {
-            await _procedureDbContext.Procedures.AddAsync(procedure);
-            await _procedureDbContext.SaveChangesAsync();
+            await _repository.Add(procedure);
             return Ok();
         }
 
@@ -47,8 +46,7 @@ namespace ProceduresApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] Procedure procedure)
         {
-            _procedureDbContext.Procedures.Update(procedure);
-            await _procedureDbContext.SaveChangesAsync();
+            _repository.Edit(procedure);
             return Ok();
         }
 
@@ -56,9 +54,7 @@ namespace ProceduresApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var procedure = await _procedureDbContext.Procedures.FindAsync(id);
-            _procedureDbContext.Procedures.Remove(procedure);
-            await _procedureDbContext.SaveChangesAsync();
+            _repository.Remove(id);
             return Ok();
         }
     }
