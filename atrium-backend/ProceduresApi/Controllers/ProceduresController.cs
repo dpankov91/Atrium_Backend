@@ -38,6 +38,7 @@ namespace ProceduresApi.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Procedure procedure)
         {
+            procedure.Status = (Procedure.ProcedureStatus)1;
             await _repository.Add(procedure);
             return Ok();
         }

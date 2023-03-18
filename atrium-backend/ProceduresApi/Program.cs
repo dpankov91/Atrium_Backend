@@ -10,6 +10,8 @@ string cloudAMQPConnectionString =
 
 // Register repositories for dependency injection
 builder.Services.AddScoped<IRepository<Procedure>, ProcedureRepository>();
+// Register database initializer for dependency injection
+builder.Services.AddTransient<IDbInitializer, DbInitializer>();
 
 // Add services to the container.
 
@@ -31,6 +33,14 @@ builder.Services.AddCors(options => options.AddPolicy("AllowEverything", builder
 #endregion
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetService<ProcedureDbContext>();
+    var dbInitializer = services.GetService<IDbInitializer>();
+    dbInitializer.Initialize(dbContext);
+}
 
 // Create a message listener in a separate thread.
 Task.Factory.StartNew(() =>
