@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Amazon;
+using Amazon.CloudWatchLogs;
+using Amazon.CloudWatchLogs.Model;
+using Amazon.Runtime;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SessionsApi.Infrastructure;
@@ -14,12 +18,16 @@ namespace SessionsApi.Controllers
     {
         private readonly SessionDbContext _sessionDbContext;
         private readonly IMessagePublisher messagePublisher;
+        private readonly ILogger<SessionsController> _logger;
 
-        public SessionsController(SessionDbContext sessionDbContext,
-                                    IMessagePublisher publisher)
+        public SessionsController(
+            SessionDbContext sessionDbContext,
+            IMessagePublisher publisher,
+            ILogger<SessionsController> logger)
         {
             _sessionDbContext = sessionDbContext;
             messagePublisher = publisher;
+            _logger = logger;
         }
 
         // GET: api/<SessionsController>
@@ -41,6 +49,25 @@ namespace SessionsApi.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Session session)
         {
+            var credentials = new BasicAWSCredentials("AKIAZMR5L5GY7M4LASUD", "pHz9OWhTtRIElopqutJzXaGoNr8DgNIXZucsBAzl"); // provide aws credentials
+
+            var logClient = new AmazonCloudWatchLogsClient(credentials, RegionEndpoint.USEast2);
+            var logGroupName = "atrium-app";
+            var logStreamName = DateTime.UtcNow.ToString("yyyyMMddHHmmssff");
+            await logClient.CreateLogGroupAsync(new CreateLogGroupRequest(logStreamName));
+            await logClient.CreateLogStreamAsync(new CreateLogStreamRequest(logGroupName, logStreamName));
+            await logClient.PutLogEventsAsync(new PutLogEventsRequest()
+            {
+                LogGroupName = logGroupName,
+                LogStreamName = logStreamName,
+                LogEvents = new List<InputLogEvent>()
+                {
+                    new InputLogEvent() { Message = "Create session called", Timestamp = DateTime.UtcNow }
+                }
+
+
+
+            }); ;
             messagePublisher.PublishProcedureStatusChangedMessage(
                 session.ProcedureId, "in_process");
 
