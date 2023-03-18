@@ -49,6 +49,17 @@ namespace SessionsApi.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Session session)
         {
+            await createAwsClientAsync($"Create session called for procedure which id is {session.ProcedureId}");
+            messagePublisher.PublishProcedureStatusChangedMessage(
+                session.ProcedureId, "in_process");
+
+            await _sessionDbContext.Sessions.AddAsync(session);
+            await _sessionDbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        public async Task createAwsClientAsync(string message)
+        {
             var credentials = new BasicAWSCredentials("AKIAZMR5L5GY7M4LASUD", "pHz9OWhTtRIElopqutJzXaGoNr8DgNIXZucsBAzl"); // provide aws credentials
 
             var logClient = new AmazonCloudWatchLogsClient(credentials, RegionEndpoint.USEast2);
@@ -62,18 +73,9 @@ namespace SessionsApi.Controllers
                 LogStreamName = logStreamName,
                 LogEvents = new List<InputLogEvent>()
                 {
-                    new InputLogEvent() { Message = "Create session called", Timestamp = DateTime.UtcNow }
+                    new InputLogEvent() { Message = message, Timestamp = DateTime.UtcNow }
                 }
-
-
-
-            }); ;
-            messagePublisher.PublishProcedureStatusChangedMessage(
-                session.ProcedureId, "in_process");
-
-            await _sessionDbContext.Sessions.AddAsync(session);
-            await _sessionDbContext.SaveChangesAsync();
-            return Ok();
+            });
         }
 
         // PUT api/<SessionsController>/5

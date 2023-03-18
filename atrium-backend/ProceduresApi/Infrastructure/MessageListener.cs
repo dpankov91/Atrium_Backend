@@ -1,7 +1,11 @@
-﻿using EasyNetQ;
+﻿using Amazon.CloudWatchLogs.Model;
+using Amazon.CloudWatchLogs;
+using Amazon.Runtime;
+using EasyNetQ;
 using ProceduresApi.Data;
 using ProceduresApi.Models;
 using SharedModels;
+using Amazon;
 
 namespace ProceduresApi.Infrastructure
 {
@@ -59,8 +63,29 @@ namespace ProceduresApi.Infrastructure
                 Procedure proc = await procedure;
                 proc.Status = (Procedure.ProcedureStatus)2;
                 procedureRepo.Edit(proc);
+                await createAwsClientAsync($"Procedure with id {message.ProcedureId} became in process mode");
 
             }
+        }
+
+        public async Task createAwsClientAsync(string message)
+        {
+            var credentials = new BasicAWSCredentials("AKIAZMR5L5GY7M4LASUD", "pHz9OWhTtRIElopqutJzXaGoNr8DgNIXZucsBAzl"); // provide aws credentials
+
+            var logClient = new AmazonCloudWatchLogsClient(credentials, RegionEndpoint.USEast2);
+            var logGroupName = "atrium-app";
+            var logStreamName = DateTime.UtcNow.ToString("yyyyMMddHHmmssff");
+            await logClient.CreateLogGroupAsync(new CreateLogGroupRequest(logStreamName));
+            await logClient.CreateLogStreamAsync(new CreateLogStreamRequest(logGroupName, logStreamName));
+            await logClient.PutLogEventsAsync(new PutLogEventsRequest()
+            {
+                LogGroupName = logGroupName,
+                LogStreamName = logStreamName,
+                LogEvents = new List<InputLogEvent>()
+                {
+                    new InputLogEvent() { Message = message, Timestamp = DateTime.UtcNow }
+                }
+            });
         }
     }
 }
