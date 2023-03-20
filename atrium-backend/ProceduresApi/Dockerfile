@@ -8,8 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /atrium-backend
 COPY ["ProceduresApi/ProceduresApi.csproj", "ProceduresApi/"]
 RUN dotnet restore "ProceduresApi/ProceduresApi.csproj"
+cd ..
 COPY . .
-WORKDIR "/atrium-backend" 
+WORKDIR "/atrium-backend/ProceduresApi" 
 RUN dotnet build "ProceduresApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
