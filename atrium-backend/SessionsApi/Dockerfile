@@ -5,11 +5,11 @@ WORKDIR /app
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["SessionsApi/SessionsApi.csproj", "SessionsApi/"]
+WORKDIR /atrium-backend
+COPY ["SessionsApi.csproj", "SessionsApi/"]
 RUN dotnet restore "SessionsApi/SessionsApi.csproj"
 COPY . .
-WORKDIR "/src/SessionsApi"
+WORKDIR "/atrium-backend/SessionsApi"
 RUN dotnet build "SessionsApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
