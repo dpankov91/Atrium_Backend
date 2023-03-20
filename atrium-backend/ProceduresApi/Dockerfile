@@ -6,7 +6,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /atrium-backend
-COPY ["ProceduresApi/ProceduresApi.csproj", "ProceduresApi/"]
+COPY ["/ProceduresApi.csproj", "ProceduresApi/"]
 RUN dotnet restore "ProceduresApi/ProceduresApi.csproj"
 COPY . .
 WORKDIR "/src/ProceduresApi"
