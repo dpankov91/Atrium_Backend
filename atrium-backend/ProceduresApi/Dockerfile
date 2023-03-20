@@ -9,7 +9,7 @@ WORKDIR /atrium-backend
 COPY ["/ProceduresApi.csproj", "ProceduresApi/"]
 RUN dotnet restore "ProceduresApi/ProceduresApi.csproj"
 COPY . .
-WORKDIR "/src/ProceduresApi"
+WORKDIR "/atrium-backend/ProceduresApi"
 RUN dotnet build "ProceduresApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
