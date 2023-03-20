@@ -5,11 +5,11 @@ WORKDIR /app
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["ApiGateway/ApiGateway.csproj", "ApiGateway/"]
+WORKDIR /atrium-backend
+COPY ["ApiGateway.csproj", "ApiGateway/"]
 RUN dotnet restore "ApiGateway/ApiGateway.csproj"
 COPY . .
-WORKDIR "/src/ApiGateway"
+WORKDIR "/atrium-backend/ApiGateway"
 RUN dotnet build "ApiGateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
